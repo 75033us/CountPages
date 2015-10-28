@@ -111,9 +111,29 @@ namespace CountPages
             else
             {
                 cancel = false;
-                runThread = new Thread(() => { run(); });
+                runThread = new Thread(() => {
+                    run();
+                    setRunButton("运行");
+                    runThread = null;
+                    cancel = false;
+                });
                 runThread.Start();
                 runButton.Text = "中止";
+            }
+        }
+
+        delegate void setRunButtonCallback(string text);
+
+        private void setRunButton(string text)
+        {
+            if (this.runButton.InvokeRequired)
+            {
+                setRunButtonCallback d = new setRunButtonCallback(setRunButton);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.runButton.Text = text;
             }
         }
 
@@ -254,31 +274,34 @@ namespace CountPages
                                 lastWeekFiles++;
                             }
 
-                            using (PdfReader reader = new PdfReader(fileName))
+                            if (checkBoxPages.Checked)
                             {
-                                logText(string.Format("{0}: {1} 页\n", Path.GetFileName(fileName), reader.NumberOfPages));
-
-                                pages += reader.NumberOfPages;
-
-                                if (monthDuration == 0)
+                                using (PdfReader reader = new PdfReader(fileName))
                                 {
-                                    curMonthPages += reader.NumberOfPages;
-                                }
-                                else if (monthDuration == 1)
-                                {
-                                    lastMonthPages += reader.NumberOfPages;
-                                }
+                                    logText(string.Format("{0}: {1} 页\n", Path.GetFileName(fileName), reader.NumberOfPages));
 
-                                if (weekDuration == 0)
-                                {
-                                    curWeekPages += reader.NumberOfPages;
-                                }
-                                else if (weekDuration == 1)
-                                {
-                                    lastWeekPages += reader.NumberOfPages;
-                                }
+                                    pages += reader.NumberOfPages;
 
-                                reader.Close();
+                                    if (monthDuration == 0)
+                                    {
+                                        curMonthPages += reader.NumberOfPages;
+                                    }
+                                    else if (monthDuration == 1)
+                                    {
+                                        lastMonthPages += reader.NumberOfPages;
+                                    }
+
+                                    if (weekDuration == 0)
+                                    {
+                                        curWeekPages += reader.NumberOfPages;
+                                    }
+                                    else if (weekDuration == 1)
+                                    {
+                                        lastWeekPages += reader.NumberOfPages;
+                                    }
+
+                                    reader.Close();
+                                }
                             }
 
                             setCount(count);

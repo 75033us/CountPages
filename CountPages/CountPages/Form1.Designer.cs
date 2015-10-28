@@ -42,6 +42,7 @@
             this.countLabel = new System.Windows.Forms.Label();
             this.pagesLabel = new System.Windows.Forms.Label();
             this.clearButton = new System.Windows.Forms.Button();
+            this.checkBoxPages = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -49,7 +50,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(25, 49);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "开始病历号";
             // 
@@ -58,7 +59,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(267, 49);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 13);
+            this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "结束病历号";
             // 
@@ -114,7 +115,7 @@
             this.folderBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::CountPages.Properties.Settings.Default, "LastFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.folderBox.Location = new System.Drawing.Point(96, 15);
             this.folderBox.Name = "folderBox";
-            this.folderBox.Size = new System.Drawing.Size(436, 20);
+            this.folderBox.Size = new System.Drawing.Size(344, 20);
             this.folderBox.TabIndex = 1;
             this.folderBox.Text = global::CountPages.Properties.Settings.Default.LastFolder;
             this.folderBox.LostFocus += new System.EventHandler(this.folderBox_LostFocus);
@@ -124,7 +125,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(291, 82);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "总页数";
             // 
@@ -133,7 +134,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(37, 82);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.Size = new System.Drawing.Size(46, 13);
             this.label4.TabIndex = 9;
             this.label4.Text = "总文件数";
             // 
@@ -165,11 +166,22 @@
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
+            // checkBoxPages
+            // 
+            this.checkBoxPages.AutoSize = true;
+            this.checkBoxPages.Location = new System.Drawing.Point(458, 17);
+            this.checkBoxPages.Name = "checkBoxPages";
+            this.checkBoxPages.Size = new System.Drawing.Size(71, 17);
+            this.checkBoxPages.TabIndex = 13;
+            this.checkBoxPages.Text = "统计页数";
+            this.checkBoxPages.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(549, 504);
+            this.Controls.Add(this.checkBoxPages);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.pagesLabel);
             this.Controls.Add(this.countLabel);
@@ -210,6 +222,7 @@
         private int _begin;
         private int _end;
         private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.CheckBox checkBoxPages;
     }
 }
 
